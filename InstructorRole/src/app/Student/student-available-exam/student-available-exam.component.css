@@ -1,0 +1,22 @@
+ .main {
+     padding-top: 114px;
+     margin-bottom: 92px
+ }
+ 
+ .card {
+     margin-left: 20px;
+     margin: 5px auto;
+ }
+ 
+ .card:hover {
+     -webkit-box-shadow: 11px 13px 29px 6px rgb(3, 55, 108);
+     -moz-box-shadow: 11px 13px 29px 6px rgb(3, 55, 108);
+     box-shadow: 11px 13px 29px 6px rgb(3, 55, 108);
+ }
+ 
+ span {
+     color: #002346;
+     font-size: 18px;
+     font-weight: bold;
+     font-size: 24px
+ }

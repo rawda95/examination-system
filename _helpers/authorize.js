@@ -20,19 +20,25 @@ function authorize(roles = []) {
     return [
 
         // authorize based on user role
-        (req, res, next) => {
+        async(req, res, next) => {
+
+            if (!req.user) {
+                return res.status(400).send({
+                    message: 'authentication error'
+                });
+            }
             let username = req.user.username;
-            const dbUser = UserModel.findOne({ username });
+            const dbUser = await UserModel.findOne({ username });
             // update 
-            dbUser.role = Role.Student;
-            dbUser.save();
+
             req.user.role = dbUser.role;
             // console.log(dbUser);
             // console.log(username);
-            console.log(req.user.role);
+            // console.log(dbUser);
 
 
             if (roles.length && !roles.includes(req.user.role)) {
+
                 // user's role is not authorized
                 return res.status(401).json({ message: 'Unauthorized' });
             } else {

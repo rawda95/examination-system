@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
+                    qauestion {{curentQuestionId+1}}
+                </div>
+
+                <form class="login100-form validate-form">
+                    <div class=" validate-input     m-b-26" data-validate="Username is required">
+                        <p>
+                            body : {{questions[curentQuestionId].body}}
+
+                        </p>
+                        <p>
+                            level : {{questions[curentQuestionId].level}}
+                        </p>
+                    </div>
+                    <div *ngIf="questions[curentQuestionId].QuesType ==='TrueOrFalse'">
+                        <!-- code to render the regular video block -->
+                        <input type="radio" name="choise" (change)="onItemChange($event)" [value]="true"> True<br>
+                        <input type="radio" name="choise" (change)="onItemChange($event)" [value]="false"> false<br>
+                    </div>
+
+
+                    <div *ngIf="questions[curentQuestionId].QuesType === 'Choice'">
+                        <!-- code to render the regular video block -->
+                        <input type="radio" name="choise" [value]="questions[curentQuestionId].Answers[0]"> {{questions[curentQuestionId].Answers[0]}}<br>
+                        <input type="radio" name="choise" [value]="questions[curentQuestionId].Answers[1]"> {{questions[curentQuestionId].Answers[1]}}<br>
+
+                        <input type="radio" name="choise" [value]="questions[curentQuestionId].Answers[2]"> {{questions[curentQuestionId].Answers[2]}}<br>
+                    </div>
+
+
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" (click)="next()">
+              next
+            </button>
+                        <button class="login100-form-btn" (click)="pref()">
+              pref
+            </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/js/popper.js"></script>
+    <script src="/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/moment.min.js"></script>
+    <script src="/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<div class="main">
+    <section class="sign-in">
+        <div class="container">
+            <div class="signin-content">
+                <div class="signin-image">
+                    <figure class="d-none d-lg-block"><img src="./../../../assets/img/Login/signin-image.jpg" alt="sing up image"></figure>
+
+                </div>
+
+                <div class="signin-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <form method="POST" class="register-form" id="login-form" (submit)="onLogin(LoginForm)" #LoginForm="ngForm">
+                        <div class="form-group">
+                            <label for="your_name"><i class="zmdi zmdi-comments"></i></label>
+                            <input id="your_name" type="text" name="username" ngModel #emailInput="ngModel" placeholder="please enter your username" required  />
+                            <!-- <mat-error *ngIf="emailInput.invalid">Plz enter a valid e-mail !!</mat-error> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" id="your_pass" #passwordInput="ngModel" placeholder="please enter your password." name="password" ngModel #passwordInput="ngModel" required />
+                        </div>
+                        <div *ngIf="error" class="text-center text-danger">
+                            {{error}}
+                        </div>
+
+                        <div class="form-group form-button">
+                            <input type="submit" name="signin" [disabled]="!LoginForm.valid" id="signin" class="form-submit" value="Log in" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

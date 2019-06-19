@@ -1,0 +1,183 @@
+<!-- <mat-card>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <form (submit)="onSignUp(signUpForm)" #signUpForm="ngForm"  *ngIf="!isLoading">
+
+            <mat-form-field>
+                        <input 
+                         matInput
+                         type="number"
+                         name="nationalId"
+                         ngModel
+                         #NatinalIdInput="ngModel"
+                         placeholder="please enter student Natinal ID."
+                         required 
+                         />
+                        <mat-error *ngIf="NatinalIdInput.invalid">Plz enter a valid Natinal ID.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input 
+                 matInput
+                 type="text"
+                 name="userName"
+                 ngModel
+                 #userNameInput="ngModel"
+                 placeholder="please enter student userName"
+                 required 
+                 />
+                <mat-error *ngIf="userNameInput.invalid">Plz enter a valid userName.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                    <input 
+                     matInput
+                     type="email"
+                     name="email"
+                     ngModel
+                     #emailInput="ngModel"
+                     placeholder="please enter your E-mail"
+                     required email
+                     />
+                    <mat-error *ngIf="emailInput.invalid">Plz enter a valid e-mail !!</mat-error>
+                </mat-form-field>
+            <mat-form-field>
+            <input
+             matInput
+             #passwordInput="ngModel" 
+             placeholder="please enter your password." 
+             type="password"
+             name="password"
+             ngModel
+             #passwordInput="ngModel"
+             required
+            />
+             
+            <mat-error *ngIf="passwordInput.invalid">Plz enter a valid password</mat-error>
+            </mat-form-field>
+
+            
+            <button
+            mat-raised-button
+            color="accent"
+            type="submit" *ngIf="!isLoading">signUp</button>
+            <mat-spinner *ngIf="isLoading" ></mat-spinner>
+        </form>
+        
+      
+      </mat-card>
+       -->
+
+       <div class="main">
+
+            <!-- Sign up form -->
+            <section class="signup">
+                <div class="container">
+                    <div class="signup-content">
+                        <div class="signup-form">
+                            <h2 class="form-title">Sign up</h2>
+                            <form method="POST" class="register-form" id="register-form" (submit)="onLogin(signUpForm)" #signUpForm="ngForm">
+                                    <mat-form-field>
+                                            <input
+                                             matInput 
+                                             type="number"  
+                                             id="nationalId" 
+                                             name="nationalId"
+                                             ngModel
+                                             #nationalIdInput="ngModel"
+                                             placeholder="please enter student National ID."
+                                             required
+                                            >
+                                            <mat-error *ngIf="nationalIdInput.invalid">Plz enter a valid e-mail !!</mat-error>
+                                    </mat-form-field>
+                                    <!-- <div class="form-group">
+                                            <label for="NatinaleID"><i class="zmdi zmdi-comments"></i></label>
+                                            <input 
+                                            type="number"  
+                                            id="nationalId" 
+                                            name="nationalId"
+                                            ngModel
+                                            #nationalIdInput="ngModel"
+                                            placeholder="please enter student National ID."
+                                            required email
+                                             />
+                                        </div> -->
+                                        <mat-form-field>
+                                                <input
+                                                  matInput
+                                                  placeholder="Enter student Name."
+                                                  type="text" 
+                                                  id="studentName"
+                                                  #studentNameInput="ngModel" 
+                                                  placeholder="please enter student Name." 
+                                                  name="studentName"
+                                                  ngModel
+                                                  #studentNameInput="ngModel"
+                                                  required
+                                                  >
+                                            <mat-error *ngIf="studentNameInput.invalid">Plz enter a valid e-mail !!</mat-error>
+                                                  
+                                              </mat-form-field>
+                                        <!-- <div class="form-group">
+                                            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                                            <input 
+                                            type="text" 
+                                            id="studentName"
+                                            #studentNameInput="ngModel" 
+                                            placeholder="please enter student Name." 
+                                            name="studentName"
+                                            ngModel
+                                            #studentNameInput="ngModel"
+                                            required
+                
+                                            />
+                                        </div> -->
+                                       
+                                       
+                                        <mat-form-field>
+                                                <input
+                                                 matInput 
+                                                 placeholder="Enter  student password"
+                                                  [type]="hide ? 'password' : 'text'"
+                                                  id="studentPassword"
+                                                  #studentNameInput="ngModel" 
+                                                  placeholder="please enter student password." 
+                                                  name="studentPassword"
+                                                  ngModel
+                                                  #studentPasswordInput="ngModel"
+                                                  required
+                                                  >
+
+                                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                </button>
+                                            <mat-error *ngIf="studentPasswordInput.invalid">Plz enter a valid e-mail !!</mat-error>
+
+                                              </mat-form-field>
+
+                                        <mat-form-field>
+                                                <mat-label>Select Track </mat-label>
+                                                <select matNativeControl id="mySelectId">
+                                                  <option value="" disabled selected></option>
+                                                  <option value="sd">SD</option>
+                                                  <option value="os">OS</option>
+                                                  <option value="el">EL </option>
+                                                   
+                                                </select>
+                                              </mat-form-field>
+                                        <!-- <div class="form-group">
+                                            <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                            <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                                        </div> -->
+                                        <div class="form-group form-button">
+                                            <input type="submit" name="signup" id="signup" class="form-submit" value="SignUp"/>
+                                        </div>
+                            </form>
+                        </div>
+                        <div class="signup-image">
+                            <figure class="d-none d-lg-block"><img src="../../../assets/img/signup/signup-image.jpg" alt="sing up image"></figure>
+                            <!-- <a href="#" class="signup-image-link">I am already member</a> -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+     
+        </div>
+    

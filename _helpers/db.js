@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 //local connect 
-mongoose.connect('mongodb://127.0.0.1:27017/exmainations', { useNewUrlParser: true });
+mongoose.connect('mongodb://127.0.0.1:27017/exmainations', { useNewUrlParser: true, useFindAndModify: false });
 
 
 // remote onnect 

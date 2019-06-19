@@ -22,6 +22,13 @@ const UserSchema = new Schema({
     },
     role: {
         type: String
+    },
+    Email: {
+        type: String,
+        unique: true,
+        validate: function(email) {
+            return /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
+        }
     }
 
 });

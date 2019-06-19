@@ -1,0 +1,80 @@
+<!--================ Start Header Menu Area =================-->
+<header class="header_area" [ngStyle]="{'background' : 'url(../assets/img/banner/home-banner.jpg)'}">
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+
+            <a class="navbar-brand logo_h" routerLink="/">
+                <img src="assets/img/logo.png" alt="" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon-bar"></span> <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                <ul class="nav navbar-nav menu_nav ml-auto">
+
+
+
+
+
+
+                    <li class="nav-item" *ngIf="userIsAuthenticated && role === 'Student'">
+                        <a class="nav-link" routerLink="/student/profile">Profile</a>
+                    </li>
+
+
+                    <li class="nav-item" *ngIf="userIsAuthenticated && role === 'Student'">
+                        <a class="nav-link" routerLink="/student/exams">avalible Exam</a>
+                    </li>
+
+
+                    <li class="nav-item " *ngIf="userIsAuthenticated  && role === 'Student'">
+                        <a class="nav-link" routerLink="/student/course">Courses</a>
+                    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <li class="nav-item" *ngIf="userIsAuthenticated">
+                        <a class="nav-link" routerLink="/report">Reports</a>
+                    </li>
+
+
+
+
+                    <li class="nav-item" *ngIf="userIsAuthenticated">
+                        <a class="nav-link" routerLink="/create">Add queston</a>
+                    </li>
+
+                    <li class="nav-item" *ngIf="!userIsAuthenticated">
+                        <a class="nav-link" routerLink="/login">LogIn</a>
+                    </li>
+                    <!-- <li class="nav-item" *ngIf="!userIsAuthenticated">
+                        <a class="nav-link" routerLink="/signUp">signUp</a>
+                    </li> -->
+                    <li class="nav-item" *ngIf="!userIsAuthenticated">
+                        <a class="nav-link" routerLink="/contact">contact</a>
+                    </li>
+                    <li class="nav-item" *ngIf="!userIsAuthenticated">
+                        <a class="nav-link" routerLink="/about">about</a>
+                    </li>
+                    <li class="nav-item" *ngIf="userIsAuthenticated">
+                        <a class="nav-link" routerLink="" (click)="onLogOut()">LogOut</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</header>

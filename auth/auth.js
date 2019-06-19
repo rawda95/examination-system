@@ -44,7 +44,7 @@ passport.use('login', new localStrategy({
         return done(null, user, { message: 'Logged in Successfully' });
 
     } catch (error) {
-        return done(error);
+        return done(null, false, { message: error });
     }
 }));
 

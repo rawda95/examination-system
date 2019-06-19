@@ -1,0 +1,84 @@
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+         
+
+        <nav>
+          <ul>
+            <li>
+              <div class="home-icon">
+                <i class="material-icons">
+                  done
+                  </i>
+              </div>
+            </li>
+            <li>
+              <div class="about-icon">
+                <i class="material-icons">
+                  clear
+                  </i>
+              </div>
+            </li>
+            <li>
+              <div class="work-icon">
+                <i class="material-icons">
+                  grade
+                  </i>
+              </div>
+            </li>
+            
+          </ul>
+        </nav>
+       
+ 
+      </div>
+    <div class="col-md-8">
+<div class="mat-table">
+      <div class="example-header" fxLayout="row">
+                     <mat-form-field>
+                      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                  </mat-form-field>
+      </div>
+
+      <div class="example-container mat-elevation-z8">
+
+        <mat-table [dataSource]="dataSource" matSort>
+      
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="id"> {{row.cnt}} </mat-cell>
+          </ng-container>
+      
+          <!-- Progress Column -->
+          <ng-container matColumnDef="grade">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Grade </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="grade"> {{row.grade}}% </mat-cell>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="std.name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> student Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" data-label="std.name"> {{row.std.name}} </mat-cell>
+          </ng-container>
+      
+          <!-- Color Column -->
+          <ng-container matColumnDef="ins.name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Instructor Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" [style.color]="row.ins.name" data-label="ins.name"> {{row.ins.name}} </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+      
+      </div>
+    </div>
+      </div>
+      </div>
+</div>

@@ -1,0 +1,91 @@
+<!-- <p>
+    {{student.FirstName}}
+</p>
+<p>
+    {{student.LastName}}
+</p>
+<p>
+    {{student.Email}}
+</p>
+<p>
+    {{student.username}}
+</p> -->
+
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="main">
+            <div class="col-md-10  sm-offset-5">
+
+                <div class="card-container">
+                    <div class="card">
+                        <div class="front">
+                            <div class="cover">
+                                <!-- <img src="https://www.clipartsgram.com/image/129556292-kyz84k3.jpg"/> -->
+                            </div>
+                            <div class="course">
+                                <!-- <img class="img-circle" src="https://www2.mmu.ac.uk/media/mmuacuk/style-assets/images/r-research/profile-Zeyad.jpg"/> -->
+                            </div>
+
+                            <div class="content">
+                                <div class="main">
+                                    <h3 class="name"> studentName:</h3>
+                                    <p style="color:#f7ac28" class="profession"> {{student.FirstName}}</p>
+                                    <p class="text-center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit, voluptatum error.</p>
+                                </div>
+                                <div class="footer">
+                                    <i class="fa fa-mail-forward"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end front panel -->
+                        <div class="back">
+                            <div class="header">
+                                <h3 class="motto">studentInfo</h3>
+                            </div>
+                            <div class="content">
+                                <div class="main">
+                                    <h4 class="text-center">StudentInformation:</h4>
+                                    <p style="color:#f7ac28" class="text-center">Name:{{student.FirstName}} {{student.LastName}}</p>
+
+                                    <div class="stats-container">
+
+                                        <div class="stats">
+                                            <h4>student Email:</h4>
+                                            <p>
+                                                {{student.Email}}
+                                            </p>
+                                        </div>
+                                        <div class="stats">
+                                            <h4>Student NationalID:</h4>
+                                            <p>{{student.NatinalID}}</p>
+                                        </div>
+                                        <div class="stats">
+                                            <h4>Student Email</h4>
+                                            <p>{{student.User.Email}}</p>
+                                        </div>
+                                        <div class="stats">
+                                            <h4>User Name</h4>
+                                            <p> {{student.User.username}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end back panel -->
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end card-container -->
+            </div>
+
+
+
+            <div class="space-200"></div>
+        </div>
+    </div>
+</div>
