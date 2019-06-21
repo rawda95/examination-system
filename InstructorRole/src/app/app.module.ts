@@ -42,6 +42,7 @@ import { StudentCoursesComponent } from './Student/student-courses/student-cours
 import { ProfileComponent } from './Student/profile/profile.component';
 import { ExamComponent } from './Exam/exam.component';
 import { InstructorCoursesComponent } from './Instructor/instructor-courses/instructor-courses.component';
+import { EditorComponent } from './Exam/editor/editor.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +67,7 @@ import { InstructorCoursesComponent } from './Instructor/instructor-courses/inst
     ProfileComponent,
     ExamComponent,
     InstructorCoursesComponent,
+    EditorComponent,
   ],
   imports: [
     BrowserModule,ReactiveFormsModule,FormsModule,BrowserAnimationsModule,
