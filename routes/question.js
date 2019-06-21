@@ -85,19 +85,23 @@ question.post("/", (request, response) => {
 
 
     if (Myquestion.QuesType == questionType.TrueOrFalse) {
-
         Myquestion.Answers.push(true);
         Myquestion.Answers.push(false);
     } else if (Myquestion.QuesType === questionType.Choice) {
-        Myquestion.Answers.push(req.body.answer1);
-        Myquestion.Answers.push(req.body.answer2);
-        Myquestion.Answers.push(req.body.answer3);
-        Myquestion.Answers.push(Myquestion.correctAns);
 
+        console.log(request.body.answer1);
+        Myquestion.Answers.push(request.body.answer1);
+        Myquestion.Answers.push(request.body.answer2);
+        Myquestion.Answers.push(request.body.answer3);
+        Myquestion.Answers.push(Myquestion.correctAns);
     }
+
+
     Myquestion.save((error) => {
         if (!error) {
             // response.redirect("/question/list");
+            console.log('in not error function on save ');
+            console.log(Myquestion);
             response.send(Myquestion);
         } else {
             response.status(400).send({

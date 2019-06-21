@@ -7,8 +7,8 @@ const express = require("express"),
 const ExamQuestionsRouter = express.Router();
 
 
-ExamQuestionsRouter.post('/:id', ExamQuestionsController.Create);
-ExamQuestionsRouter.post('/answer/:id', ExamQuestionsController.answerExam);
+ExamQuestionsRouter.post('/', authorize(Role.Student), ExamQuestionsController.Create);
+ExamQuestionsRouter.post('/answer/', authorize(Role.Student), ExamQuestionsController.answerExam);
 
 
 // StudentRouter.get('/try', authorize(Role.Student), studentController.temp);

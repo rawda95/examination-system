@@ -8,7 +8,7 @@ const express = require("express"),
 const StudentSubjectRouter = express.Router();
 
 
-StudentSubjectRouter.get('/:id', studentSubjestController.FindStudnetCourses);
+StudentSubjectRouter.get('/', studentSubjestController.FindStudnetCourses);
 
 StudentSubjectRouter.post('/:id', studentSubjestController.addCourseToStudent);
 StudentSubjectRouter.put('/:id', studentSubjestController.SetCourseDegree);

@@ -15,10 +15,12 @@ const ExamModel = new Schema({
         ref: 'teacher'
     },
     course: {
-        type: Schema.Types.ObjectId,
+        type: Number,
         ref: 'subject'
     },
+    Time: Number,
     numOfHardQ: {
+
         type: Number
     },
     numOfEasyQ: {

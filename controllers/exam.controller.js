@@ -66,7 +66,8 @@ const Create = async(req, res, next) => {
         course: req.body.course,
         numOfHardQ: req.body.numOfHardQ,
         numOfEasyQ: req.body.numOfEasyQ,
-        numOfNormalQ: req.body.numOfNormalQ
+        numOfNormalQ: req.body.numOfNormalQ,
+        Time: req.body.Time
 
     });
 
@@ -199,32 +200,54 @@ const getStudentAvalibleExam = async(req, res) => {
 
     try {
 
-        let studnet = await studentModel.findOne({ User: req.params.id });
-        let studentCoureses = await studentModel.findOne({ User: req.params.id }).select('Courses');
+        let studnet = await studentModel.findOne({ User: req.user });
+        // console.log(`student : ${studnet}`);
+        let studentCoureses = await studentModel.findOne({ User: req.user }).select('Courses');
+        // console.log(studentCoureses);
+        // console.log(`studnet in token ${studnet}`)
+        // console.log("#############################");
+        // console.log(studentCoureses);
         studentCoureses = studentCoureses.Courses;
+        // console.log("#############################");
         studentCoureses = studentCoureses.map(o => {
-            return o._id
+            return o.Name
         });
-        console.log(Date.now());
+        console.log(studentCoureses);
+        studentCoureses = await courseModel.find({
+            Name: {
+                $in: studentCoureses
+            }
+        }).select('_id');
+        console.log(studentCoureses);
 
-        // let studentExam = await studentExamModel.find({
-        //     studnet: studnet
-        // }).select('exam');
+        // console.log("#############################");
+        // console.log(studentCoureses);
+        // console.log(Date.now());
+
+        let studentExam = await studentExamModel.find({
+            studnet: studnet.User
+        }).populate({
+            path: 'exam'
+        }).select('exam');
+
+        let x = studentExam.map(o => {
+            return o.exam.exam
+        });
 
         let exams = await ExamModel.find({
             'course': {
                 $in: studentCoureses
             },
-            // '_id': {
-            //     $in: studentExam
-            // }
-            // 'startDate': {
-            //     $lte: Date.now()
-            // },
-            // 'endDate': {
-            //     $gte: Date.now()
+            '_id': {
+                $nin: x
+            },
+            'startDate': {
+                $lte: Date.now()
+            },
+            'endDate': {
+                $gte: Date.now()
 
-            // }
+            }
 
         }).populate({
             path: 'course'

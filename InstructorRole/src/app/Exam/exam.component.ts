@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ExamService} from './exam.service';
 import {Question} from './question';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import { FormsModule }   from '@angular/forms';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-exam',
@@ -20,23 +22,31 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 ]})
 export class ExamComponent implements OnInit {
 
-  constructor(private examService: ExamService, private router: ActivatedRoute) {
+  constructor(private examService: ExamService, private router: ActivatedRoute ) {
    }
   curentAnswer = '';
   main_exam_id ;
   questions: Question [] ;
   curentQuestionId = 0;
   answers = [];
-  obj ;
+  obj;
   examId ;
   error;
+  textq ; 
+  time;
+  timeLeft: number;
+  interval;
+  subscribeTimer: any;
   getExam(): void {
     // /5cfb9084dc4d755c73341c0b
     this.examService.getExam(this.main_exam_id).subscribe(
        (result) => {
-         console.log(`examq id ${result._id}`);
-         this.examId = result._id;
-         this.questions = result.questions;
+         console.log(result);
+         console.log(`examq id ${result.q._id}`);
+         this.examId = result.q._id;
+         this.questions = result.q.questions;
+         this.time = result.time;
+         this.timeLeft = this.time;
          console.log(this.questions);
         },
 
@@ -56,20 +66,39 @@ export class ExamComponent implements OnInit {
     console.log(`event target ${event.target.value}`);
     this.curentAnswer = event.target.value ;
     console.log(`curent answer  ${this.curentAnswer}`);
+
   }
 
 next() {
   if (this.answers.find(o => o.question === this.questions[this.curentQuestionId]._id)) {
     this.answers[this.curentQuestionId].answer = this.curentAnswer;
 
-  } else {
- this.obj = {
-  question : this.questions[this.curentQuestionId]._id,
-  answer  : this.curentAnswer
+  }else {
+ let q = this.questions[this.curentQuestionId];
+ console.log(q);
+ if (q.QuesType === 'Text') {
+  this.obj = {
+    question : q._id,
+    answer  : this.textq
+   };
 
-};
+ } else if (q.QuesType === 'Code') {
+
+  this.obj = {
+    question : q._id,
+    answer  : this.textq
+   };
+ } else {
+ this.obj = {
+  question : q._id,
+  answer  : this.curentAnswer
+ };
+}
 
  this.answers.push(this.obj);
+ this.curentAnswer ='';
+ this.textq = '';
+
   }
   console.log(`student answers : ${this.answers}`);
 
@@ -78,31 +107,40 @@ next() {
 });
   console.log(this.curentAnswer);
 
-  if (this.curentQuestionId === this.questions.length - 1) {
+  if (this.curentQuestionId === this.questions.length ) {
     // make submet
-    this.examService.answerExam(this.examId, this.answers).subscribe(result => {
-      if (result.message === 'saved ') {
-        // this.router.navigate(['student/home']);
-
-      }
-    });
-    console.log('done');
     // this.route
   } else {
     this.curentQuestionId += 1;
   }
 }
 
-pref() {
+prev() {
   if (this.curentQuestionId > 0) {
 
   this.curentQuestionId -= 1;
   }
 }
 
+
+
+submit() {
+
+
+
+  this.examService.answerExam(this.examId, this.answers).subscribe(result => {
+    if (result.message === 'saved ') {
+      // this.router.navigate(['student/home']);
+
+    }
+  });
+  alert('done save  شااااااااطر ي زفت');
+  console.log('done');
+}
   ngOnInit() {
 
 
+  this.startTimer();
   console.log(this.questions);
 
   this.main_exam_id = this.router.snapshot.paramMap.get( 'main_exam_id');
@@ -115,12 +153,45 @@ pref() {
       // error page
       console.log('error page ');
         }
-   });                                                                                                                                                    
+   });
   this.getExam();
+
+
 
 
 
 
   }
 
+  // timer
+
+  oberserableTimer() {
+    const source = timer(1000, 2000);
+    const abc = source.subscribe(val => {
+      console.log(val, '-');
+      this.subscribeTimer = this.timeLeft - val;
+    });
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = this.time;
+        alert('الوقت خلص ');
+        this.pauseTimer();
+        this.submit();
+      }
+    }, 1000*60 );
+  }
+
+  pauseTimer() {
+    clearInterval(this.interval);
+  }
+
+
 }
+
+
+

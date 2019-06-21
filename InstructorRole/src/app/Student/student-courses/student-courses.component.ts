@@ -17,7 +17,7 @@ export class StudentCoursesComponent implements OnInit {
   }
 
   getStdCourses() {
-    this.studentCoursesService.getStdCourses(25).subscribe(
+    this.studentCoursesService.getStdCourses().subscribe(
       result => {
         console.log(`coursess ${result}`);
         this.courses = result.courses;

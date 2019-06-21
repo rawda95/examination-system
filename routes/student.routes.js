@@ -9,14 +9,13 @@ const express = require("express"),
 
 const StudentRouter = express.Router();
 
-
+StudentRouter.use('/courses', authorize(Role.Student), studentSubjectRouter);
+StudentRouter.use('/exam', authorize(Role.Student), ExamQuestionsRouter);
 StudentRouter.post('/', studentController.Create);
 StudentRouter.get('/', studentController.FindAll);
 StudentRouter.get('/:id', studentController.findOne);
 StudentRouter.delete('/:id', studentController.remove);
 StudentRouter.put('/:id', studentController.update);
-StudentRouter.use('/courses', studentSubjectRouter);
-StudentRouter.use('/exam', ExamQuestionsRouter);
 // StudentRouter.get('/try', authorize(Role.Student), studentController.temp);
 
 module.exports = StudentRouter;

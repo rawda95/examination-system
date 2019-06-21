@@ -8,7 +8,7 @@ const express = require("express"),
 const TeacherSubjectRouter = express.Router();
 
 
-TeacherSubjectRouter.get('/:id', TeacherSubjestController.FindTeacherCourses);
+TeacherSubjectRouter.get('/', TeacherSubjestController.FindTeacherCourses);
 TeacherSubjectRouter.post('/:id', TeacherSubjestController.addCourseToTeacher);
 TeacherSubjectRouter.delete('/:id', TeacherSubjestController.RemoveCourseFromTeacher);
 

@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.post('/login', async(req, res, next) => {
     console.log('in login function');
+    console.log(req.body.password);
     if (!req.body.username) {
         return res.status(500).send({
             message: "username is required"

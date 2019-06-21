@@ -33,28 +33,30 @@
                     <li class="nav-item " *ngIf="userIsAuthenticated  && role === 'Student'">
                         <a class="nav-link" routerLink="/student/course">Courses</a>
                     </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <li class="nav-item" *ngIf="userIsAuthenticated">
-                        <a class="nav-link" routerLink="/report">Reports</a>
+                    <li class="nav-item" *ngIf="userIsAuthenticated && role === 'Teacher'">
+                        <a class="nav-link" routerLink="/create">profile</a>
                     </li>
 
 
 
+                    <li class="nav-item" *ngIf="userIsAuthenticated && role === 'Teacher'">
+                        <a class="nav-link" routerLink="/report">Reports</a>
+                    </li>
 
-                    <li class="nav-item" *ngIf="userIsAuthenticated">
-                        <a class="nav-link" routerLink="/create">Add queston</a>
+
+                    <li class="nav-item" *ngIf="userIsAuthenticated && role === 'Teacher'">
+                        <a class="nav-link" routerLink="/teacher/courses">Courses</a>
+                    </li>
+
+
+                    <li class="nav-item" *ngIf="userIsAuthenticated && role === 'Teacher'">
+                        <a class="nav-link" routerLink="/create">Add question</a>
+                    </li>
+
+
+
+                    <li class="nav-item" *ngIf="userIsAuthenticated && role === 'Teacher'">
+                        <a class="nav-link" routerLink="/create">Create Exam</a>
                     </li>
 
                     <li class="nav-item" *ngIf="!userIsAuthenticated">

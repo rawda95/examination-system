@@ -8,16 +8,12 @@ const StudentModel = mongoose.model('Student'),
 
 const FindStudnetCourses = async(req, res, next) => {
 
-    if (isNaN(req.params.id)) {
-        return res.status(400).send({
-            message: 'id must be a number'
-        });
-    }
+    console.log('in find student coureses funcation');
     try {
         // courses = await StudentModel.findOne({ User: req.params.id }).populate({
         //     path: 'Courses'
         // }).select('Courses');
-        let student = await StudentModel.findOne({ User: req.params.id });
+        let student = await StudentModel.findOne({ User: req.user });
 
         if (!student) {
             return res.status(404).send({

@@ -21,6 +21,7 @@ export class LoginComponent {
     constructor(private loginservice: LoginService, private router: Router) {}
     onLogin(form: NgForm) {
 
+        this.error = '';
         console.log('in login');
         if (form.invalid) {
             return;
@@ -29,6 +30,7 @@ export class LoginComponent {
         this.loginservice.login(form.value).subscribe((response) => {
             // this.error = null;
             this.loginservice.token = response.token;
+            console.log(`token : ${this.loginservice.token}`);
             // this.token = token;
             if (this.loginservice.token) {
 
@@ -45,6 +47,12 @@ export class LoginComponent {
              } else if (response.role === 'Student') {
                 console.log('in student role');
                 this.router.navigate(['/student/exams']);
+
+             }
+             else if(response.role === 'Teacher')
+             {
+                console.log('in Teacher role');
+                this.router.navigate(['teacher/courses']);
 
              }
             }

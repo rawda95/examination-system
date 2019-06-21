@@ -1,6 +1,7 @@
 module.exports = {
     Choice: 'Choice',
     TrueOrFalse: 'TrueOrFalse',
-    Text: 'Text'
+    Text: 'Text',
+    Code: 'Code'
 
 };

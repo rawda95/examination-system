@@ -7,17 +7,14 @@ const TeacherModel = mongoose.model('teacher'),
     CourseModel = mongoose.model('subject');
 
 const FindTeacherCourses = async(req, res, next) => {
-    if (isNaN(req.params.id)) {
-        return res.status(400).send({
-            message: 'id must be a number'
-        });
-    }
+
     try {
         // courses = await StudentModel.findOne({ User: req.params.id }).populate({
         //     path: 'Courses'
         // }).select('Courses');
+        console.log(req.user);
         let teacher = await TeacherModel.findOne({
-            User: req.params.id
+            User: req.user
         });
 
         if (!teacher) {
@@ -25,9 +22,17 @@ const FindTeacherCourses = async(req, res, next) => {
                 message: `teacher  not found with id ${req.params.id}`
             });
         } else {
+            courses = await CourseModel.find({
+                Name: {
+                    $in: teacher.Courses
+                }
+            }).populate({
+                path: 'Track'
+            });
+            console.log(courses);
             res.send({
                 teacher: req.params.id,
-                courses: teacher.Courses
+                courses: courses
             });
         }
 

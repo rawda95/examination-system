@@ -72,7 +72,7 @@ subject.post("/add", (request, response) => {
     var x = microtime.now();
     let Mysubject = new subjectSchema({
         _id: x.toString(),
-        name: request.body.name,
+        Name: request.body.name,
         Track: request.body.Track
 
     });
@@ -81,9 +81,9 @@ subject.post("/add", (request, response) => {
 
     Mysubject.save((error) => {
         if (!error) {
-            response.redirect("/subject/list");
+            response.send(Mysubject);
         } else {
-            console.log(error.message)
+            response.status(400).send(error.message);
         }
     });
 

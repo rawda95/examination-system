@@ -24,7 +24,7 @@ let questionSchema = new mongoose.Schema({
     },
     Answers: [{
         type: String,
-        ref: "answers"
+
     }]
 });
 questionSchema.plugin(random);

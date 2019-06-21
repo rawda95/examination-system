@@ -6,13 +6,14 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentCoursesService {
-
+export class InstructorCoursesService {
 
   constructor(private http: HttpClient) { }
-  url = 'http://localhost:3000/student/courses';
 
-  getStdCourses(): Observable <{courses}>
+
+  url = 'http://localhost:3000/teacher/courses';
+
+  getInstCourses(): Observable <{courses}>
   {
     return this.http.get<{courses}>(this.url + `/?token=` + localStorage.getItem('currentUserToken'));
   }

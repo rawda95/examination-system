@@ -25,7 +25,7 @@ import { StudentCoursesComponent } from './Student/student-courses/student-cours
 import { ProfileComponent } from './Student/profile/profile.component';
 import { ExamComponent } from './Exam/exam.component';
 
-
+import { InstructorCoursesComponent } from './Instructor/instructor-courses/instructor-courses.component';
 
 const routes: Routes = [
     {path: '', component: IndexComponent},
@@ -34,7 +34,7 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'signUp', component: SignUpComponent},
     // {path:'signUp',component:SignUpComponent},
-    {path: 'courses', component: CoursesComponent, canActivate: [AuthGuard]},
+    {path: 'teacher/courses', component:InstructorCoursesComponent, canActivate: [AuthGuard]},
     {path: 'footer', component: FooterComponent, canActivate: [AuthGuard]},
     {path: 'profile', component: InstructorProfileComponent, canActivate: [AuthGuard]},
     {path: 'report', component: InstructorReportComponent, canActivate: [AuthGuard]},

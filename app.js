@@ -22,7 +22,9 @@ var answerRouter = require('./routes/answer');
 var typeRouter = require('./routes/type');
 // var teacherRouter = require('./routes/teacher');
 var subjectRouter = require('./routes/subject');
+var trackRouter = require('./routes/track');
 //
+
 
 
 // connect db 
@@ -56,9 +58,9 @@ app.use('/users', passport.authenticate('jwt', { session: false }), usersRouter)
 app.use('/emp', passport.authenticate('jwt', { session: false }), empRouter);
 // app.use('/student', passport.authenticate('jwt', { session: false }), StudentRouter);
 
-app.use('/student', StudentRouter);
-app.use('/teacher', teacherRouter);
-app.use('/exam', ExamRouter);
+app.use('/student', passport.authenticate('jwt', { session: false }), StudentRouter);
+app.use('/teacher', passport.authenticate('jwt', { session: false }), teacherRouter);
+app.use('/exam', passport.authenticate('jwt', { session: false }), ExamRouter);
 
 // catch 404 and forward to error handler
 
@@ -74,6 +76,7 @@ app.use('/type', passport.authenticate('jwt', { session: false }), typeRouter);
 app.use('/answer', passport.authenticate('jwt', { session: false }), answerRouter);
 // app.use('/teacher', teacherRouter);
 app.use('/subject', subjectRouter);
+app.use('/track', trackRouter);
 /****************** */ //
 app.use(function(req, res, next) {
     next(createError(404));

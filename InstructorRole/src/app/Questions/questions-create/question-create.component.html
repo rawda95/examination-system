@@ -1,83 +1,81 @@
 <div class="add-question">
-<!-- 
-<mat-radio-group class = "tp-radio-group" [(ngModel)] = "questionType">
-   <mat-radio-button class = "tp-radio-button"  [(ngModel)]="options"
-      *ngFor = "let type of questionTypes"  [value] = "type">
-      {{type}}
-   </mat-radio-button>
-</mat-radio-group> -->
 
 
-<!-- <mat-radio-group class = "tp-radio-group" [(ngModel)] = "questionType">
-        <mat-radio-button class = "tp-radio-button"  [(ngModel)]="options" [value]="MCQ"  >MCQ</mat-radio-button>
-        <mat-radio-button class = "tp-radio-button"  [(ngModel)]="options" [value]="Multi Choose"   >Multi Choose</mat-radio-button>
-        <mat-radio-button class = "tp-radio-button"  [(ngModel)]="options" [value]="Text"  >Text</mat-radio-button>
-
-</mat-radio-group> -->
-<!-- <div class = "tp-selected-value">
-   Selected type: {{questionType}}
-   
-</div> -->
+    <mat-card>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
 
 
- 
-<mat-card >
-   <mat-spinner *ngIf="isLoading"></mat-spinner>
-   <mat-radio-group class = "tp-radio-group">
-         <mat-radio-button class = "tp-radio-button" 
-            *ngFor = "let type of questionTypes"  [value] = "type">
-            {{type}}
-         </mat-radio-button>
-   </mat-radio-group>
-   
-   <div class = "tp-selected-value">
-         Selected type: {{questionType}}
-         
-   </div> 
 
-   <form [formGroup]="form" (submit)="onSaveQuestion()" #postForm="ngForm" *ngIf="!isLoading">
-        
-       
-       <mat-form-field>
-           <input 
-            matInput
-            type="text"
-             formControlName="title"
-            placeholder="write Question title!!"
-            />
-           <mat-error *ngIf="form.get('title').invalid">Plz enter a question <title></title></mat-error>
-       </mat-form-field>  
-       <!-- <div>
-           <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
-           <input type="file" #filePicker (change)="onImagePicked($event)"/>
-       </div>
-       <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
-          <img [src]="imagePreview" [alt]="form.value.title"/>
-       </div> -->
-       <mat-form-field>
-       <textarea
-        
+        <mat-radio-group *ngFor="let type of questionTypes" class="tp-radio-group">
 
-        matInput 
-        formControlName="content"
-        placeholder="Write Question content" 
-        rows="6"
-        name="content"
-        >
+
+            <input type="radio" name="type" (change)="onItemChange($event)" [value]="type"> {{type}}<br>
+
+        </mat-radio-group>
+
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">select Level
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu" [(ngModel)]="selectedLevel" (click)="onLevelSelected($event)">
+                <li [value]="easy"><a>Easy</a></li>
+                <li [value]="normal"><a>Normal</a></li>
+                <li [value]="hard"><a>Hard </a></li>
+            </ul>
+        </div><br><br><br><br><br><br>
+
+
+        <form [formGroup]="form" (submit)="onSaveQuestion()" #postForm="ngForm" *ngIf="!isLoading">
+
+
+            <mat-form-field>
+                <input matInput type="text" formControlName="title" placeholder="write Question title!!" />
+                <mat-error *ngIf="form.get('title').invalid">Plz enter a question
+                    <title></title>
+                </mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field *ngIf="questionType === 'Text' || questionType === 'Code' ">
+                <textarea matInput formControlName="correcAns" placeholder="Write Question content" rows="6" name="correcAns">
        </textarea>
-       <mat-error *ngIf="form.get('content').invalid">Plz enter a question content</mat-error>
-       </mat-form-field> 
-       <button
-       mat-raised-button
-       color="accent"
-       type="submit">Save</button>
-   </form>
-   
- 
- </mat-card>
- 
- <hr>
- <p>{{NewQuestion}}</p>
+                <mat-error *ngIf="form.get('content').invalid">Plz enter a question content</mat-error>
+            </mat-form-field>
+
+
+
+            <mat-form-field *ngIf="questionType === 'Choice' ">
+                <input name='answer1' formControlName="answer1" type="text"> answer1
+
+                <input name=answer2 formControlName="answer2" type="text"> answer2
+
+                <input name="answer3" formControlName="answer3" type="text"> answer3
+
+                <input name="correcAns" formControlName="answer4" type="text"> correct answer
+
+
+
+                <mat-error *ngIf="form.get('content').invalid">Plz enter a question content</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field *ngIf="questionType === 'TrueOrFalse' ">
+
+                <input type="radio" name="correcAns" formControlName="true"> true<br>
+                <input type="radio" name="correcAns" formControlName="false"> false<br>
+
+                <mat-error *ngIf="form.get('content').invalid">Plz enter a question content</mat-error>
+            </mat-form-field>
+
+
+
+            <button mat-raised-button color="accent" type="submit">Save</button>
+        </form>
+
+
+    </mat-card>
+
+    <hr>
+    <p>{{NewQuestion}}</p>
 
 </div>
-<!-- ///////////////// -->

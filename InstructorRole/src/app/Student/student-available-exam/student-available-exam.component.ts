@@ -17,7 +17,7 @@ studentAvalibleExams: Exam[];
   }
 
   getExams() {
-    this.studetnAvailableExamService.getStdAvalibleExams(25).subscribe(
+    this.studetnAvailableExamService.getStdAvalibleExams().subscribe(
       result => {
         this.studentAvalibleExams = result.exams;
         console.log(`result : ${result.exams}`);

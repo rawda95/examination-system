@@ -41,6 +41,7 @@ import { ContactComponent } from './contact/contact.component';
 import { StudentCoursesComponent } from './Student/student-courses/student-courses.component';
 import { ProfileComponent } from './Student/profile/profile.component';
 import { ExamComponent } from './Exam/exam.component';
+import { InstructorCoursesComponent } from './Instructor/instructor-courses/instructor-courses.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { ExamComponent } from './Exam/exam.component';
     ContactComponent,
     StudentCoursesComponent,
     ProfileComponent,
-    ExamComponent
+    ExamComponent,
+    InstructorCoursesComponent,
   ],
   imports: [
     BrowserModule,ReactiveFormsModule,FormsModule,BrowserAnimationsModule,

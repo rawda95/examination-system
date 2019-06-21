@@ -110,7 +110,8 @@ const Create = async(req, res, next) => {
         FirstName: req.body.FirstName,
         LastName: req.body.LastName,
         Phone: req.body.Phone,
-        NatinalID: req.body.NatinalID
+        NatinalID: req.body.NatinalID,
+        Track: req.body.Track
     });
 
 

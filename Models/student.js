@@ -28,6 +28,10 @@ const StudentModel = new Schema({
 
             }
         },
+        Track: {
+            type: String,
+            ref: "track"
+        },
         User: {
             type: Number,
             ref: 'User'
@@ -37,6 +41,7 @@ const StudentModel = new Schema({
                 type: String,
                 ref: 'subject'
             },
+
             degree: {
                 type: Number,
                 min: 0

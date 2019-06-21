@@ -17,11 +17,14 @@ export class QuestionCreateComponent implements OnInit {
    mode = 'create';
    question: Question;
    questionId: string;
+   questionType: string;
    isLoading = false;
    form: FormGroup;
    imagePreview: string;
 
-   questionTypes: string[] = ['MCQ', 'Multi Choose', 'Text'];
+   questionTypes: string[] = ['Choice', 'TrueOrFalse', 'Text', 'Code'];
+
+   levels: string[] = ['Easy' ,' Normal' ,'Hard'];
   // model.prop = 'A';
 
    questionCreated = new EventEmitter<Question>();
@@ -29,13 +32,62 @@ export class QuestionCreateComponent implements OnInit {
    constructor(public questionsService: QuestionsService, public route: ActivatedRoute) {
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+  onItemChange(event) {
+    console.log(`event target ${event.target.value}`);
+    this.questionType = event.target.value ;
+    console.log(`curent answer  ${this.questionType}`);
+
+  }
+
+  onLevelSelected(event) {
+   
+     console.log(event.target.value);
+
+    // $(this).parents('.input-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');       
+ 
+
+
+  }
+
+
+
+
+
+
+
+
    ngOnInit() {
      this.form = new FormGroup({
           title: new FormControl(null, {validators: [Validators.required, Validators.minLength(3)]
       }),
-          content: new FormControl(null, {validators: [Validators.required]
+           level: new FormControl(null, {validators: [Validators.required]
       }),
-          image: new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]})
+      correcAns: new FormControl(null, {validators: [Validators.required]
+
+      }),
+      questionType: new FormControl(null, {validators: [Validators.required]
+
+      }),
+      answer1: new FormControl(null),
+      answer2: new FormControl(null),
+      answer3: new FormControl(null),
+      answer4: new FormControl(null),
+
+
+
+
       });
 
 
@@ -48,7 +100,7 @@ export class QuestionCreateComponent implements OnInit {
         .subscribe(questionData => {
           this.isLoading = false;
           this.question = {id: questionData._id, title: questionData.title, content: questionData.content},
-          this.form.setValue({title: this.question.title,content: this.question.content});
+          this.form.setValue({title: this.question.title, content: this.question.content});
 
         });
 
@@ -78,14 +130,54 @@ export class QuestionCreateComponent implements OnInit {
       //   }
        this.isLoading = true;
        if (this.mode === 'create') {
+
+
+
+        // const obj = {
+        //   body: this.form.value.title,
+        //   level: this.form.value.level,
+        //   correctAns : this.form.correcAns,
+        //   Subject : this.form.Subject,
+        //   QuesType: this.questionType,
+
+
+        // };
+
+
+        if (this.questionType === 'Choice') {
+
+          console.log('in choise question');
+          console.log(this.form.value.answer1);
           this.questionsService.addQuestion
              (this.form.value.title,
-              this.form.value.content,
-              this.form.value.image);
+              this.form.value.level,
+              this.form.value.correcAns,
+              this.questionType,
+              this.form.value.answer1,
+              this.form.value.answer2,
+              this.form.value.answer3
+              );
 
-      }
-      else {
-        this.questionsService.updateQuestion(this.questionId, this.form.value.title, this.form.value.content);
+
+        }else {
+          this.questionsService.addQuestion
+             (this.form.value.title,
+              this.form.value.level,
+              this.form.value.correcAns,
+              this.questionType,
+             );
+
+        }
+
+
+
+        // this.questionsService.addQuestion
+        //      (this.form.value.title,
+        //       this.form.value.content,
+        //       this.form.value.answer4);
+
+      } else {
+        // this.questionsService.updateQuestion(this.questionId, this.form.value.title, this.form.value.content);
       }
        this.form.reset();
   }

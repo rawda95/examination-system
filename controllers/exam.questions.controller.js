@@ -21,7 +21,7 @@ const Create = async(req, res) => {
     try {
 
         var student = await studentModel.findOne({
-            User: req.params.id
+            User: req.user
         });
     } catch (studentError) {
         res.status(400).send({
@@ -134,7 +134,10 @@ const Create = async(req, res) => {
                                                 path: 'questions'
                                             }, function(err, q) {
                                                 // examQuestions = q;
-                                                res.send(q);
+                                                res.send({
+                                                    q,
+                                                    time: exam.Time
+                                                });
 
                                             });
 
@@ -164,7 +167,7 @@ const answerExam = async(req, res) => {
     try {
 
         var student = await studentModel.findOne({
-            User: req.params.id
+            User: req.user
         });
         if (!student) {
             res.status(400).send({
@@ -249,7 +252,7 @@ const correctExam = async(examQId, studentAnswer) => {
         let x = await ExamStudentModel.findById(id).populate(studentAnswer, {
             path: 'AnswerList.question'
         });
-    console.log(`x ${x}`);
+        console.log(`x ${x}`);
     } catch (err) {
         console.log(err);
     }

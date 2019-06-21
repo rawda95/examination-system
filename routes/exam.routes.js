@@ -6,13 +6,13 @@ const express = require("express"),
     ExamController = require('../controllers/exam.controller');
 const ExamRouter = express.Router();
 
+ExamRouter.get('/avalible', ExamController.getStudentAvalibleExam);
 
 ExamRouter.get('/', ExamController.FindAll);
 ExamRouter.get('/:id', ExamController.FindById);
 ExamRouter.post('/', ExamController.Create);
 ExamRouter.put('/:id', ExamController.Update);
 ExamRouter.delete('/:id', ExamController.Remove);
-ExamRouter.get('/avalible/:id', ExamController.getStudentAvalibleExam);
 
 
 // StudentRouter.get('/try', authorize(Role.Student), studentController.temp);

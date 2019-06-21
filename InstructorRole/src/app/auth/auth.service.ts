@@ -15,7 +15,7 @@ private authStatusListener =new  Subject<boolean>();
 constructor(private httpClient: HttpClient,private router: Router) {}
 
 getToken() {
-return;
+return this.token;
 }
 getIsAuth() {
   return this.isAuthenticated;
