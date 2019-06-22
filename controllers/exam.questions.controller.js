@@ -1,5 +1,7 @@
 const mongoose = require("mongoose"),
-    Level = require('../_helpers/questionLevel');
+    Level = require('../_helpers/questionLevel'),
+    questionType = require('../_helpers/questionType');
+
 
 require("../Models/Exam.questions");
 require("../Models/questionModel");
@@ -257,6 +259,39 @@ const correctExam = async(examQId, studentAnswer) => {
         console.log(err);
     }
 }
+
+const correctQuestion = async(qId, answer) => {
+
+    let question = await questionModel.findById(qId);
+
+    // check for question level and assige grad for question
+
+    let grade;
+    if (question.level === Level.Easy) {
+        grade = 2;
+    } else if (question.level === Level.Hard) {
+        grade = 6;
+    } else if (question.level === Level.Normal) {
+        grade = 4;
+
+    }
+
+
+    if (question.QuesType === questionType.Choice) {
+
+
+
+        if (question.correctAns == answer) {
+
+        }
+
+    }
+
+
+}
+
+
+
 
 module.exports = {
     Create,
