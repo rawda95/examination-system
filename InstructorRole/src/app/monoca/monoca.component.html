@@ -1,0 +1,36 @@
+<p>
+  monoca works!
+</p>
+
+
+<!--Start Lang-->
+
+<div>
+    <select id="selectLang" (change)="selectLang($event.target.value)">
+        <option value="c_cpp">C++</option>
+        <option value="csharp" >C#</option>
+        <option value="javascript" selected>JS</option>
+
+    </select>
+
+</div>
+<!--End Lang-->
+
+<br>
+
+<!--Start Switch Button-->
+<label class="switch">
+  <input id="switchMode" checked type="checkbox" (click)="changeMode($event.target.checked)">
+  <span class="slider round"></span>
+</label>
+<!--End Switch Button-->
+
+
+<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+
+
+<button type="submit" (click)="runCode()" class="btn btn-primary">Run</button>
+
+
+
+<p>{{output.data}}</p>

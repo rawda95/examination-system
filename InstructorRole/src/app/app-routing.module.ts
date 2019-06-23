@@ -26,6 +26,9 @@ import { ProfileComponent } from './Student/profile/profile.component';
 import { ExamComponent } from './Exam/exam.component';
 
 import { InstructorCoursesComponent } from './Instructor/instructor-courses/instructor-courses.component';
+import { StudentCourseInfoComponent } from './Student/student-course-info/student-course-info.component';
+import { CreateExamComponent } from './Instructor/create-exam/create-exam.component';
+import { MonocaComponent } from './monoca/monoca.component';
 
 const routes: Routes = [
     {path: '', component: IndexComponent},
@@ -34,17 +37,20 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'signUp', component: SignUpComponent},
     // {path:'signUp',component:SignUpComponent},
-    {path: 'teacher/courses', component:InstructorCoursesComponent, canActivate: [AuthGuard]},
+    {path: 'teacher/courses', component: InstructorCoursesComponent, canActivate: [AuthGuard]},
     {path: 'footer', component: FooterComponent, canActivate: [AuthGuard]},
     {path: 'profile', component: InstructorProfileComponent, canActivate: [AuthGuard]},
     {path: 'report', component: InstructorReportComponent, canActivate: [AuthGuard]},
     {path: 'getCoursInfo/:id', component: CourseInfoComponent , canActivate: [AuthGuard]},
     {path: 'student/exams', component: StudentAvailableExamComponent , canActivate: [AuthGuard]},
-    {path: 'student/course', component: CoursesComponent , canActivate: [AuthGuard]},
+    {path: 'student/course', component: StudentCoursesComponent , canActivate: [AuthGuard]},
     {path: 'student/profile', component: ProfileComponent , canActivate: [AuthGuard]},
     {path: 'exam/:main_exam_id', component: ExamComponent, canActivate: [AuthGuard]},
     {path: 'about', component: AboutComponent},
-    {path: 'contact', component: ContactComponent}
+    {path: 'contact', component: ContactComponent},
+    {path: 'student/course/:id', component: StudentCourseInfoComponent},
+    {path: 'insructor/createExam', component: CreateExamComponent},
+    {path: 'editor', component: MonocaComponent},
 
 
 

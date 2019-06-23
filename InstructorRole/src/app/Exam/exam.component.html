@@ -58,7 +58,7 @@
                     <div *ngIf="questions[curentQuestionId].QuesType === 'Code'">
                         <!-- code to render the regular video block -->
                         code q
-                        <app-editor></app-editor>
+                        <!-- <app-editor></app-editor> -->
                     </div>
 
 
@@ -75,7 +75,7 @@
 
 
                     <div class="container-login100-form-btn">
-                        <button [disabled]="curentQuestionId === questions.length " class="login100-form-btn" (click)="next()">
+                        <button [disabled]="curentQuestionId === questions.length+1 " class="login100-form-btn" (click)="next()">
               next
             </button>
                         <button class="login100-form-btn" [disabled]="curentQuestionId === 0" (click)="prev()">

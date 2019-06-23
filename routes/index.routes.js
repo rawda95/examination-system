@@ -1,11 +1,18 @@
 const express = require('express'),
     passport = require('passport'),
-    jwt = require('jsonwebtoken');
+    jwt = require('jsonwebtoken'),
+    sendMail = require('../controllers/sendMail'),
+    codeSim = require('../controllers/codeSimilarity');
+
 
 
 
 const router = express.Router();
 
+
+router.post('/sendmail', sendMail.send);
+
+router.use('/code', codeSim);
 
 router.post('/login', async(req, res, next) => {
     console.log('in login function');

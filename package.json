@@ -15,14 +15,18 @@
         "express": "~4.16.0",
         "generate-password": "^1.4.2",
         "http-errors": "~1.6.2",
+        "leven": "^3.1.0",
         "microtime": "^3.0.0",
         "mongoose": "^5.5.11",
         "mongoose-auto-increment": "^5.0.1",
         "mongoose-sequence": "^5.0.1",
         "mongoose-simple-random": "^0.4.1",
         "morgan": "~1.9.0",
+        "nodemailer": "^6.2.1",
+        "paiza-io": "^0.2.3",
         "passport": "^0.4.0",
         "passport-jwt": "^4.0.0",
-        "passport-local": "^1.0.0"
+        "passport-local": "^1.0.0",
+        "string-similarity": "^3.0.0"
     }
 }

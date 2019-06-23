@@ -163,6 +163,7 @@ const Create = async(req, res) => {
     }
 };
 
+var studentAnswer = [];
 
 const answerExam = async(req, res) => {
 
@@ -209,7 +210,22 @@ const answerExam = async(req, res) => {
             await studentAnswer.save();
 
 
-            correctExam(1, studentAnswer);
+            // let result ; 
+            await correctExam(studentAnswer, res);
+            // console.log(a);
+            // .then((result) => {
+
+            //     console.log('in result then');
+            //     res.send({
+            //         message: 'saved',
+            //         result: result.grade
+
+            //     });
+            // })
+
+
+
+            // console.log(result);
             // var a = correctExam(1, studentAnswer);
             // a.then(ret_val => {
             //     // a = ret_val;
@@ -219,10 +235,7 @@ const answerExam = async(req, res) => {
             // });
 
             // console.log(` a : ${a}`);
-            res.send({
-                message: 'saved',
 
-            });
 
         } catch (err) {
             res.status(400).send({
@@ -239,25 +252,44 @@ const answerExam = async(req, res) => {
 }
 
 
+const correctExam = (studentAnswer, res) => {
+
+    let StudentGrade = 0;
+    // console.log(StudentGrade);
+    studentAnswer.AnswerList.forEach(async(stdAns, index) => {
+        g = await correctQuestion(stdAns.question, stdAns.answer);
+        // studentAnswer.push(g);
+        StudentGrade += g;
+
+        if (index === studentAnswer.AnswerList.length - 1) {
+
+            studentAnswer.grade = StudentGrade;
+            await studentAnswer.save();
+
+            console.log('after assinge ');
+            console.log(studentAnswer.grade);
+
+            res.send({
+                message: 'saved',
+                result: StudentGrade
+
+            });
+            return studentAnswer;
+
+        }
+    });
 
 
 
 
 
 
-const correctExam = async(examQId, studentAnswer) => {
 
-    console.log(`id : ${studentAnswer}`);
-    console.log(studentAnswer.id)
-    let id = studentAnswer.id;
-    try {
-        let x = await ExamStudentModel.findById(id).populate(studentAnswer, {
-            path: 'AnswerList.question'
-        });
-        console.log(`x ${x}`);
-    } catch (err) {
-        console.log(err);
-    }
+
+
+
+
+
 }
 
 const correctQuestion = async(qId, answer) => {
@@ -266,7 +298,7 @@ const correctQuestion = async(qId, answer) => {
 
     // check for question level and assige grad for question
 
-    let grade;
+    var grade = 0;
     if (question.level === Level.Easy) {
         grade = 2;
     } else if (question.level === Level.Hard) {
@@ -277,14 +309,24 @@ const correctQuestion = async(qId, answer) => {
     }
 
 
-    if (question.QuesType === questionType.Choice) {
 
+    if (question.QuesType === questionType.Choice || question.QuesType === questionType.TrueOrFalse) {
+        if (question.correctAns === answer) {
+            return grade;
 
-
-        if (question.correctAns == answer) {
-
+        } else {
+            return 0;
         }
 
+    } else if (question.QuesType === questionType.Text) {
+        return 0;
+        // text simlarty
+    } else if (question.QuesType === questionType.Code) {
+
+        return 0;
+        //run code 
+    } else {
+        console.log('in else for type ');
     }
 
 

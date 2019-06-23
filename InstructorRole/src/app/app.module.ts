@@ -17,12 +17,12 @@ import {MatInputModule,
 import { HeaderComponent } from './header/header.component';
 import { QuestionListComponent } from './Questions/questions-list/question-list.component';
 import { QuestionsService } from './Questions/question.service';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { from } from 'rxjs';
 import { AppRoutingModule } from './app-routing.module';
-import {ReactiveFormsModule,FormsModule} from '@angular/forms'
-import {LoginComponent} from './auth/login/login.component'
-import {SignUpComponent} from './auth/signUp/signUp.component'
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {LoginComponent} from './auth/login/login.component';
+import {SignUpComponent} from './auth/signUp/signUp.component';
 import { AuthIntercepter } from './auth/auth-intercepter';
 import { CoursesComponent } from './courses/courses.component';
 import {  NO_ERRORS_SCHEMA } from '@angular/core';
@@ -42,7 +42,23 @@ import { StudentCoursesComponent } from './Student/student-courses/student-cours
 import { ProfileComponent } from './Student/profile/profile.component';
 import { ExamComponent } from './Exam/exam.component';
 import { InstructorCoursesComponent } from './Instructor/instructor-courses/instructor-courses.component';
-import { EditorComponent } from './Exam/editor/editor.component';
+// import { EditorComponent } from './Exam/editor/editor.component';
+import { StudentCourseInfoComponent } from './Student/student-course-info/student-course-info.component';
+import { CreateExamComponent } from './Instructor/create-exam/create-exam.component';
+
+// import { MonocaComponent } from './Exam/monoca/monoca.component';
+import { MonocaComponent } from './monoca/monoca.component';
+import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+
+
+
+const monacoConfig: NgxMonacoEditorConfig = {
+  baseUrl: 'src/assets', // configure base path for monaco editor
+  defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
+  onMonacoLoad: () => { console.log((<any>window).monaco); } // here monaco object will be available as window.monaco use this function to extend monaco editor functionalities.
+};
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,16 +83,20 @@ import { EditorComponent } from './Exam/editor/editor.component';
     ProfileComponent,
     ExamComponent,
     InstructorCoursesComponent,
-    EditorComponent,
+    // EditorComponent,
+    StudentCourseInfoComponent,
+    CreateExamComponent,
+    MonocaComponent,
   ],
   imports: [
-    BrowserModule,ReactiveFormsModule,FormsModule,BrowserAnimationsModule,
-    MatInputModule,MatCardModule,MatButtonModule,MatToolbarModule,
-    MatExpansionModule,HttpClientModule,AppRoutingModule, MatPaginatorModule, 
-    MatSortModule,MatTableModule,MatProgressSpinnerModule,MatRadioModule, MDBBootstrapModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    BrowserModule, ReactiveFormsModule, FormsModule, BrowserAnimationsModule,
+    MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule,
+    MatExpansionModule, HttpClientModule, AppRoutingModule, MatPaginatorModule,
+    MatSortModule, MatTableModule, MatProgressSpinnerModule, MatRadioModule, MDBBootstrapModule.forRoot()
   ],
   exports: [ ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthIntercepter,multi:true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthIntercepter, multi: true}],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

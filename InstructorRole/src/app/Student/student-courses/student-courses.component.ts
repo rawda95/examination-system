@@ -11,7 +11,7 @@ export class StudentCoursesComponent implements OnInit {
 
   constructor(private studentCoursesService: StudentCoursesService) { }
 
-  courses: course[];
+  Courses: course[];
   ngOnInit() {
     this.getStdCourses();
   }
@@ -20,13 +20,14 @@ export class StudentCoursesComponent implements OnInit {
     this.studentCoursesService.getStdCourses().subscribe(
       result => {
         console.log(`coursess ${result}`);
-        this.courses = result.courses;
-        console.log(this.courses);
+        this.Courses = result.courses;
+        console.log(this.Courses);
 
 
       }
     );
   }
-
 }
+
+
 

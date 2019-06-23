@@ -220,7 +220,7 @@ body {
 .card .stats {
     display: block;
     float: left;
-    width: 33.333333%;
+    width: 25%;
     text-align: center;
 }
 
@@ -234,15 +234,12 @@ body {
 
 .card .stats h4 {
     font-family: 'Arima Madurai', cursive;
+    font-weight: 300;
     margin-bottom: 5px;
-    color: #153053;
-    font-size: 24px;
-    font-weight: bold
 }
 
 .card .stats p {
-    color: #f7ac28;
-    font-weight: bold;
+    color: #777777;
 }
 
 
@@ -283,6 +280,10 @@ body {
     background-color: #FFFFFF;
     min-height: 200px;
     padding: 60px 60px 20px;
+}
+
+.ct-heart {
+    color: #F74933;
 }
 
 pre.prettyprint {
@@ -372,7 +373,7 @@ pre.prettyprint {
     }
     .back {
         visibility: hidden;
-        -ms-transition: all 0.2s cubic-bezier(.92, .01, .83, .67);
+        ms-transition: all 0.2s cubic-bezier(.92, .01, .83, .67);
     }
     .front {
         z-index: 4;
@@ -382,4 +383,8 @@ pre.prettyprint {
         z-index: 5;
         visibility: visible;
     }
+}
+
+.fff {
+    margin: 5px auto
 }
