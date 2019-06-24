@@ -11,7 +11,10 @@ let answersSchema = mongoose.model("answers");
 let teacherSchema = mongoose.model("teacher");
 let subjectSchema = mongoose.model("subject");
 
-subject.get("/list", (request, response) => {
+
+let authorize = require('../_helpers/authorize'),
+    Role = require('../_helpers/role');
+subject.get("/list", authorize(Role.Emp), (request, response) => {
     console.log("hello");
     subjectSchema.find({})
         .then((result) => {
@@ -25,7 +28,7 @@ subject.get("/list", (request, response) => {
             response.send("error");
         });
 });
-subject.get("/getsubs/:id", (request, response) => {
+subject.get("/getsubs/:id", authorize(Role.Emp, Role.Teacher), (request, response) => {
     console.log("hello");
     subjectSchema.find({ Track: request.params.id })
         .then((result) => {
@@ -41,7 +44,7 @@ subject.get("/getsubs/:id", (request, response) => {
 });
 
 
-subject.get("/getbyid/:id", (request, response) => {
+subject.get("/getbyid/:id", authorize(Role.Emp), (request, response) => {
     console.log("hello");
     subjectSchema.findOne({ _id: request.params.id })
         .then((result) => {
@@ -56,7 +59,7 @@ subject.get("/getbyid/:id", (request, response) => {
         });
 });
 
-subject.get("/delete/:id", (request, response) => {
+subject.get("/delete/:id", authorize(Role.Admin), (request, response) => {
     console.log("came here ");
     subjectSchema.remove({ _id: request.params.id }, (error) => {
         if (!error) {
@@ -68,7 +71,7 @@ subject.get("/delete/:id", (request, response) => {
     })
 }); //delete subject 
 
-subject.post("/add", (request, response) => {
+subject.post("/add", authorize(Role.Emp, Role.Admin), (request, response) => {
     var x = microtime.now();
     let Mysubject = new subjectSchema({
         _id: x.toString(),
@@ -101,7 +104,7 @@ subject.post("/add", (request, response) => {
 // }); 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-subject.get("/edit/:id", async(req, res) => {
+subject.get("/edit/:id", authorize(Role.Emp, Role.Admin), async(req, res) => {
 
     if (isNaN(req.params.id)) {
         return res.status(400).send({
@@ -134,7 +137,7 @@ subject.get("/edit/:id", async(req, res) => {
 
 });
 
-subject.put("/edit/:id", async(req, res, next) => {
+subject.put("/edit/:id", authorize(Role.Emp, Role.Admin), async(req, res, next) => {
     console.log('in eidt function');
     console.log(req);
     if (isNaN(req.params.id)) {

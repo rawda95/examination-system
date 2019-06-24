@@ -8,11 +8,11 @@ const express = require("express"),
 const StudentSubjectRouter = express.Router();
 
 
-StudentSubjectRouter.get('/', studentSubjestController.FindStudnetCourses);
+StudentSubjectRouter.get('/', authorize(Role.Student), studentSubjestController.FindStudnetCourses);
 
-StudentSubjectRouter.post('/:id', studentSubjestController.addCourseToStudent);
-StudentSubjectRouter.put('/:id', studentSubjestController.SetCourseDegree);
+StudentSubjectRouter.post('/:id', authorize(Role.Emp), studentSubjestController.addCourseToStudent);
+StudentSubjectRouter.put('/:id', authorize(Role.Emp), studentSubjestController.SetCourseDegree);
 
-StudentSubjectRouter.delete('/:id', studentSubjestController.RemoveCourseToStudent);
+StudentSubjectRouter.delete('/:id', authorize(Role.Emp), studentSubjestController.RemoveCourseToStudent);
 
 module.exports = StudentSubjectRouter;

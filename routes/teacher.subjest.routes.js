@@ -8,8 +8,8 @@ const express = require("express"),
 const TeacherSubjectRouter = express.Router();
 
 
-TeacherSubjectRouter.get('/', TeacherSubjestController.FindTeacherCourses);
-TeacherSubjectRouter.post('/:id', TeacherSubjestController.addCourseToTeacher);
-TeacherSubjectRouter.delete('/:id', TeacherSubjestController.RemoveCourseFromTeacher);
+TeacherSubjectRouter.get('/', authorize(Role.Teacher), TeacherSubjestController.FindTeacherCourses);
+TeacherSubjectRouter.post('/:id', authorize(Role.Admin), TeacherSubjestController.addCourseToTeacher);
+TeacherSubjectRouter.delete('/:id', authorize(Role.Admin), TeacherSubjestController.RemoveCourseFromTeacher);
 
 module.exports = TeacherSubjectRouter;

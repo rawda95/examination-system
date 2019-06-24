@@ -29,6 +29,10 @@ import { InstructorCoursesComponent } from './Instructor/instructor-courses/inst
 import { StudentCourseInfoComponent } from './Student/student-course-info/student-course-info.component';
 import { CreateExamComponent } from './Instructor/create-exam/create-exam.component';
 import { MonocaComponent } from './monoca/monoca.component';
+import { ErrorComponent } from './error/error.component';
+
+//admin 
+import {EditTeacherComponent} from './Admin/edit-teacher/edit-teacher.component';
 
 const routes: Routes = [
     {path: '', component: IndexComponent},
@@ -51,6 +55,19 @@ const routes: Routes = [
     {path: 'student/course/:id', component: StudentCourseInfoComponent},
     {path: 'insructor/createExam', component: CreateExamComponent},
     {path: 'editor', component: MonocaComponent},
+    {path: 'error', component: ErrorComponent},
+
+
+    // {path:"admin", component:StudentComponent}, 
+    // {path:"admin/courses", component:subjectsComponent}, 
+    // {path:"admin/students", component:StudentComponent}, 
+    // {path:"admin/teachers", component:TeachersComponent},  
+     {path:"admin/editteacher/:id", component:EditTeacherComponent},  
+//     {path:"admin/editstudent/:id", component:EditstudentComponent}, 
+//    {path:"admin/tracks",component:TrackComponent },
+//    {path:"",redirectTo:"/admin",pathMatch:"full"},  
+//     {path:"**",component:ErrorComponent},
+  
 
 
 

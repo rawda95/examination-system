@@ -8,12 +8,12 @@ const express = require("express"),
 
 const teacherRouter = express.Router();
 
-teacherRouter.use('/courses', passport.authenticate('jwt', { session: false }),TeacherSubjectRouter);
-teacherRouter.post('/', teacherController.Create);
-teacherRouter.get('/', teacherController.FindAll);
-teacherRouter.get('/:id', teacherController.findOne);
-teacherRouter.delete('/:id', teacherController.remove);
-teacherRouter.put('/:id', teacherController.update);
+teacherRouter.use('/courses', passport.authenticate('jwt', { session: false }), authorize(Role.Teacher), TeacherSubjectRouter);
+teacherRouter.post('/', authorize(Role.Admin), teacherController.Create);
+teacherRouter.get('/', authorize(Role.Admin), teacherController.FindAll);
+teacherRouter.get('/:id', authorize(Role.Admin), teacherController.findOne);
+teacherRouter.delete('/:id', authorize(Role.Admin), teacherController.remove);
+teacherRouter.put('/:id', authorize(Role.Admin), teacherController.update);
 
 // StudentRouter.get('/try', authorize(Role.Student), studentController.temp);
 

@@ -11,11 +11,11 @@ const StudentRouter = express.Router();
 
 StudentRouter.use('/courses', authorize(Role.Student), studentSubjectRouter);
 StudentRouter.use('/exam', authorize(Role.Student), ExamQuestionsRouter);
-StudentRouter.post('/', studentController.Create);
-StudentRouter.get('/', studentController.FindAll);
-StudentRouter.get('/:id', studentController.findOne);
-StudentRouter.delete('/:id', studentController.remove);
-StudentRouter.put('/:id', studentController.update);
+StudentRouter.post('/', authorize(Role.Emp), studentController.Create);
+StudentRouter.get('/', authorize(Role.Emp), studentController.FindAll);
+StudentRouter.get('/:id', authorize(Role.Emp), studentController.findOne);
+StudentRouter.delete('/:id', authorize(Role.Emp), studentController.remove);
+StudentRouter.put('/:id', authorize(Role.Emp), studentController.update);
 // StudentRouter.get('/try', authorize(Role.Student), studentController.temp);
 
 module.exports = StudentRouter;

@@ -8,11 +8,11 @@ const express = require("express"),
 const EmptRouter = express.Router();
 
 
-EmptRouter.post('/create', EmpController.Create);
-EmptRouter.get('/', EmpController.FindAll);
-EmptRouter.get('/:id', EmpController.findOne);
-EmptRouter.delete('/:id', EmpController.remove);
-EmptRouter.put('/:id', EmpController.update);
+EmptRouter.post('/create', authorize(Role.Admin), EmpController.Create);
+EmptRouter.get('/', authorize(Role.Admin), EmpController.FindAll);
+EmptRouter.get('/:id', authorize(Role.Admin), EmpController.findOne);
+EmptRouter.delete('/:id', authorize(Role.Admin), EmpController.remove);
+EmptRouter.put('/:id', authorize(Role.Admin), EmpController.update);
 //EmptRouter.get('/try', authorize(Role.Student), EmpController.temp);
 
 module.exports = EmptRouter;

@@ -9,7 +9,14 @@ let typeSchema = mongoose.model("type");
 let answersSchema = mongoose.model("answers");
 let teacherSchema = mongoose.model("teacher");
 let subjectSchema = mongoose.model("subject");
-teacher.get("/list", (request, response) => {
+
+
+
+let authorize = require('../_helpers/authorize'),
+    Role = require('../_helpers/role');
+
+
+teacher.get("/list", authorize(Role.Emp), (request, response) => {
 
     teacherSchema.find({})
 
@@ -24,7 +31,7 @@ teacher.get("/list", (request, response) => {
 
 
 }); // get all teachers    
-teacher.get("/delete/:id", (request, reposne) => {
+teacher.get("/delete/:id", authorize(Role.Admin), (request, reposne) => {
 
     teacherSchema.remove({ _id: request.params.id }, (error) => {
         if (!error) {
@@ -37,7 +44,7 @@ teacher.get("/delete/:id", (request, reposne) => {
 }); //delete teacher  
 
 
-teacher.post("/add", (request, response) => {
+teacher.post("/add", authorize(Role.Admin), (request, response) => {
 
         let Myteacher = new teacherSchema({
 
@@ -54,7 +61,7 @@ teacher.post("/add", (request, response) => {
         });
     }) // add teacher    
 
-teacher.get("/edit/:id", (request, response) => {
+teacher.get("/edit/:id", authorize(Role.Admin), (request, response) => {
 
     teacherSchema.findOne({ _id: request.params.id }, (error, result) => {
         response.send({ reqAns: result })
@@ -64,7 +71,7 @@ teacher.get("/edit/:id", (request, response) => {
 });
 
 
-teacher.post("/edit/:id", (request, response) => {
+teacher.post("/edit/:id", authorize(Role.Admin), (request, response) => {
         teacherSchema.updateOne({ _id: request.params.id }, {
             $set: {
                 name: request.body.name,
@@ -82,7 +89,7 @@ teacher.post("/edit/:id", (request, response) => {
 
 
 
-teacher.get("/getteacherrel/:id", (request, response) => {
+teacher.get("/getteacherrel/:id", authorize(Role.Admin), (request, response) => {
     console.log("come to this link");
     console.log("come to this link2");
     console.log(request.params.id);
@@ -105,7 +112,7 @@ teacher.get("/getteacherrel/:id", (request, response) => {
 
 
 
-teacher.post("/edit/:id", (request, response) => {
+teacher.post("/edit/:id", authorize(Role.Admin), (request, response) => {
         teacherSchema.updateOne({ _id: request.params.id }, {
             $set: {
                 name: request.body.name,

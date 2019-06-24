@@ -13,35 +13,76 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
-                    question {{curentQuestionId+1}} total questions : {{questions.length }}
-
+                    <span class="login100-form-title-1">
+						Question {{curentQuestionId+1}} tatal:{{questions.length }}
+					</span>
                     <p>{{timeLeft}} min Left....</p>
+
                 </div>
 
                 <form #form class="login100-form validate-form">
-                    <div class=" validate-input     m-b-26" data-validate="Username is required">
-                        <p>
-                            body : {{questions[curentQuestionId].body}}
+                    <div class="exam-info">
+                        <div class=" validate-input m-b-26">
+                            <span>Level:</span><span>{{questions[curentQuestionId].level}}</span>
+                        </div>
 
-                        </p>
-                        <p>
-                            level : {{questions[curentQuestionId].level}}
-                        </p>
+                        <div class="validate-input m-b-18">
+                            <span> Body:</span><span>{{questions[curentQuestionId].body}}</span>
+                        </div>
+
                     </div>
                     <div *ngIf="questions[curentQuestionId].QuesType ==='TrueOrFalse'">
-                        <!-- code to render the regular video block -->
-                        <input type="radio" name="choise" (change)="onItemChange($event)" [value]="true"> True<br>
-                        <input type="radio" name="choise" (change)="onItemChange($event)" [value]="false"> false<br>
+                        <!-- true Or false -->
+
+                        <div class="wrap-input100 validate-input m-b-18 ">
+                            <div class="radioType">
+
+                                <div class="inputGroup">
+                                    <input id="radio1" name="choise" (change)="onItemChange($event)" [value]="true" type="radio" />
+                                    <label for="radio1">Yes</label>
+                                </div>
+                                <div class="inputGroup">
+                                    <input id="radio2" name="choise" (change)="onItemChange($event)" [value]="false" type="radio" />
+                                    <label for="radio2">No</label>
+                                </div>
+                                <!-- <input type="radio" name="choise" (change)="onItemChange($event)" [value]="true"> True<br>
+                               <input type="radio" name="choise" (change)="onItemChange($event)" [value]="false"> false<br> -->
+                            </div>
+                        </div>
                     </div>
 
 
                     <div *ngIf="questions[curentQuestionId].QuesType === 'Choice'">
-                        <!-- code to render the regular video block -->
-                        <input type="radio" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[0]"> {{questions[curentQuestionId].Answers[0]}}<br>
-                        <input type="radio" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[1]"> {{questions[curentQuestionId].Answers[1]}}<br>
-                        <input type="radio" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[2]"> {{questions[curentQuestionId].Answers[2]}}<br>
-                        <input type="radio" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[3]"> {{questions[curentQuestionId].Answers[3]}}<br>
+                        <!-- //choose. -->
+                        <div class="wrap-input100 validate-input m-b-18">
+                            <!-- code to render the regular video block -->
+                            <div class="inputGroup">
+                                <input id="radio3" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[0]" type="radio" />
+                                <label for="radio3">{{questions[curentQuestionId].Answers[0]}}</label>
+                            </div>
+                            <div class="inputGroup">
+                                <input id="radio4" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[1]" type="radio" />
+                                <label for="radio4">{{questions[curentQuestionId].Answers[1]}}</label>
+                            </div>
+                            <div class="inputGroup">
+                                <input id="radio5" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[2]" type="radio" />
+                                <label for="radio5">{{questions[curentQuestionId].Answers[2]}}</label>
+                            </div>
+                            <div class="inputGroup">
+                                <input id="radio6" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[3]" type="radio" />
+                                <label for="radio6">{{questions[curentQuestionId].Answers[2]}}</label>
+                            </div>
 
+
+
+
+
+                            <!-- <input type="radio" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[0]"> {{questions[curentQuestionId].Answers[0]}}<br> -->
+                            <!-- <input type="radio" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[1]"> {{questions[curentQuestionId].Answers[1]}}<br> -->
+                            <!-- <input type="radio" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[2]"> {{questions[curentQuestionId].Answers[2]}}<br> -->
+                            <!-- <input type="radio" name="choise" (change)="onItemChange($event)" [value]="questions[curentQuestionId].Answers[3]"> {{questions[curentQuestionId].Answers[3]}}<br> -->
+
+                        </div>
                     </div>
 
 
@@ -49,33 +90,58 @@
 
                     <div *ngIf="questions[curentQuestionId].QuesType === 'Text'">
                         <!-- code to render the regular video block -->
-                        text
-                        <textarea cols='12' name='textq' style="border:2px solid blue" [(ngModel)]="textq" rows="9"></textarea>
+                        <!-- //text question -->
+                        <div class="wrap-input100 validate-input m-b-18">
+                            <!-- <span class="label-input100">No.Normal Question:</span> -->
+                            <div id="wrapper">
+                                <textarea placeholder="Enter something funny." id="text" name="text" rows="4" [(ngModel)]="textq" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px; "></textarea>
+                            </div>
+
+                            <!-- <textarea cols='30' rows="6" name='textq' style="border:2px solid blue" [(ngModel)]="textq" rows="9"></textarea> -->
+
+
+                        </div>
                     </div>
 
-
+                    <!-- //code -->
 
                     <div *ngIf="questions[curentQuestionId].QuesType === 'Code'">
                         <!-- code to render the regular video block -->
+                        <app-monoca></app-monoca>
                         code q
-                        <!-- <app-editor></app-editor> -->
+                        <div class="wrap-input100 validate-input m-b-18">
+
+                            <!-- IDE component -->
+
+                        </div>
                     </div>
-
-
-
-
-
-
-
-
-
 
 
 
 
 
                     <div class="container-login100-form-btn">
-                        <button [disabled]="curentQuestionId === questions.length+1 " class="login100-form-btn" (click)="next()">
+                        <button style="margin-left: 10px;padding-left: 12px" [disabled]="curentQuestionId === 0" (click)="prev()" class="login100-form-btn">
+						    prev
+						</button>
+                        <button style="margin-right: 10px" [disabled]="curentQuestionId === questions.length " class="login100-form-btn" (click)="next()" class="login100-form-btn">
+							next
+						</button>
+                        <button style="margin-left:93px ; margin-top: 17px;" class="login100-form-btn" [disabled]="curentQuestionId == 0" (click)="submit()">
+							submit
+						</button>
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <!-- <div class="container-login100-form-btn">
+                        <button [disabled]="curentQuestionId === questions.length " class="login100-form-btn" (click)="next()">
               next
             </button>
                         <button class="login100-form-btn" [disabled]="curentQuestionId === 0" (click)="prev()">
@@ -88,7 +154,7 @@
                 submit
               </button>
 
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>

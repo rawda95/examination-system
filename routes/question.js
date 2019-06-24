@@ -15,10 +15,12 @@ let teacherSchema = mongoose.model("teacher");
 
 
 
+let authorize = require('../_helpers/authorize'),
+    Role = require('../_helpers/role');
 
 let questionType = require('../_helpers/questionType');
 // error in populate 
-question.get("/list/:id", (request, response) => {
+question.get("/list/:id", authorize(Role.teacher), (request, response) => {
     console.log("hello");
     console.log(request.params);
     questionSchema.find({
@@ -51,7 +53,7 @@ question.get('/', async(req, res) => {
         });
     }
 });
-question.get("/listques/:id", (request, response) => {
+question.get("/listques/:id", authorize(Role.teacher), (request, response) => {
     console.log("hello");
     questionSchema.find({
             Subject: request.params.id
@@ -71,7 +73,7 @@ question.get("/listques/:id", (request, response) => {
 // get all question related to specefic subject 
 
 //post or add question 
-question.post("/", (request, response) => {
+question.post("/", authorize(Role.teacher), (request, response) => {
 
     let Myquestion = new questionSchema({
         body: request.body.body,
@@ -134,7 +136,7 @@ question.post("/", (request, response) => {
 
 
 //delete 
-question.delete("/:id", (request, response) => {
+question.delete("/:id", authorize(Role.Emp), (request, response) => {
     questionSchema.deleteOne({ _id: request.params.id }).then(result => {
             console.log(result);
             response.status(200).json({ message: "Question deleted" });
@@ -149,7 +151,7 @@ question.delete("/:id", (request, response) => {
 
 
 
-question.get("/edit/:id", (request, response) => {
+question.get("/edit/:id", authorize(Role.teacher, Role.Emp), (request, response) => {
     questionSchema.findOne({
         _id: request.params.id
     }, (error, result1) => {
@@ -165,7 +167,7 @@ question.get("/edit/:id", (request, response) => {
 
 
 // noha get by id 
-question.get("/:id", (response, request) => {
+question.get("/:id", authorize(Role.teacher, Role.Emp), (response, request) => {
     Question.findById(request.params.id).then(question => {
         if (question) {
             response.status(200).json(question)
@@ -179,7 +181,7 @@ question.get("/:id", (response, request) => {
 
 
 
-question.post("/edit/:id", (request, response) => {
+question.post("/edit/:id", authorize(Role.teacher, Role.Emp), (request, response) => {
     questionSchema.updateOne({
         _id: request.params.id
     }, {
@@ -203,7 +205,7 @@ question.post("/edit/:id", (request, response) => {
 
 
 // noha update 
-question.put("/:id", (request, response) => {
+question.put("/:id", authorize(Role.teacher, Role.Emp), (request, response) => {
     const question = new Question({
         _id: request.body.id,
         title: request.body.title,

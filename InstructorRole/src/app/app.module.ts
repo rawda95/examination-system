@@ -49,6 +49,8 @@ import { CreateExamComponent } from './Instructor/create-exam/create-exam.compon
 // import { MonocaComponent } from './Exam/monoca/monoca.component';
 import { MonocaComponent } from './monoca/monoca.component';
 import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+import { ErrorComponent } from './error/error.component';
+import { EditTeacherComponent } from './Admin/edit-teacher/edit-teacher.component';
 
 
 
@@ -87,6 +89,8 @@ const monacoConfig: NgxMonacoEditorConfig = {
     StudentCourseInfoComponent,
     CreateExamComponent,
     MonocaComponent,
+    ErrorComponent,
+    EditTeacherComponent
   ],
   imports: [
     MonacoEditorModule.forRoot(),

@@ -17,6 +17,9 @@ const send = async(req, res) => {
         }
     });
     console.log('in sendMail function');
+    console.log(req.body.email);
+    console.log(req.body.subject);
+    console.log(req.body.message);
 
     let mailOptions = {
         from: 'rawda95.r@gmail.com', // sender address
@@ -33,12 +36,13 @@ const send = async(req, res) => {
                 message: error
             });
 
-        }
-        console.log("Done")
+        } else {
+            console.log("Done");
 
-        res.send({
-            message: 'done'
-        });
+            res.send({
+                message: 'done'
+            });
+        }
         // console.log('Message %s sent: %s', info.messageId, info.response);
         // res.render('index');
     });

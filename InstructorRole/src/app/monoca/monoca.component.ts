@@ -21,7 +21,9 @@ export class MonocaComponent implements OnInit {
   constructor(private monocaService: MonocaService) { }
 
   ngOnInit() {
+    console.log('in editor ');
   }
+
 
 // Select Lang
 selectLang(lang: string) {

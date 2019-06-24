@@ -70,10 +70,6 @@ export class ExamComponent implements OnInit {
   }
 
 next() {
-  if(this.curentQuestionId ===this.questions.length)
-  {
-    return ;
-  }
   if (this.answers.find(o => o.question === this.questions[this.curentQuestionId]._id)) {
     this.answers[this.curentQuestionId].answer = this.curentAnswer;
 
@@ -131,7 +127,6 @@ prev() {
 submit() {
 
 
-  this.pauseTimer();
 
   this.examService.answerExam(this.examId, this.answers).subscribe(result => {
     if (result.message === 'saved ') {
@@ -185,6 +180,7 @@ submit() {
       } else {
         this.timeLeft = this.time;
         alert('الوقت خلص ');
+        this.pauseTimer();
         this.submit();
       }
     }, 1000*60 );

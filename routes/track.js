@@ -13,6 +13,10 @@ let teacherSchema = mongoose.model("teacher");
 let subjectSchema = mongoose.model("subject");
 let trackSchema = mongoose.model("track");
 
+
+let authorize = require('../_helpers/authorize'),
+    Role = require('../_helpers/role');
+
 track.get("/list", (request, response) => {
     console.log("hello");
     trackSchema.find({})
@@ -44,7 +48,7 @@ track.get("/getbyid/:id", (request, response) => {
         });
 });
 
-track.get("/delete/:id", (request, response) => {
+track.get("/delete/:id", authorize(Role.Admin), (request, response) => {
     console.log("came here ");
     trackSchema.remove({ _id: request.params.id }, (error) => {
         if (!error) {
@@ -56,7 +60,7 @@ track.get("/delete/:id", (request, response) => {
     })
 }); //delete track 
 
-track.post("/add", (request, response) => {
+track.post("/add", authorize(Role.Admin), (request, response) => {
     console.log("call post method");
     var x = microtime.now();
 
@@ -83,7 +87,7 @@ track.post("/add", (request, response) => {
 }); // add an track     
 
 
-track.get("/edit/:id", (request, response) => {
+track.get("/edit/:id", authorize(Role.Admin), (request, response) => {
     console.log("hhjj");
     trackSchema.findOne({ _id: request.params.id }, (
 
@@ -95,7 +99,7 @@ track.get("/edit/:id", (request, response) => {
 });
 
 
-track.post("/edit/:id", (request, response) => {
+track.post("/edit/:id", authorize(Role.Admin), (request, response) => {
         console.log("come to edit");
         trackSchema.updateOne({ _id: request.params.id }, {
             $set: {

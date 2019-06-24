@@ -70,13 +70,13 @@ app.use('/exam', passport.authenticate('jwt', { session: false }), ExamRouter);
 
 
 /************************ */ //
-app.use('/question', questionRouter);
+app.use('/question', passport.authenticate('jwt', { session: false }), questionRouter);
 
 app.use('/type', passport.authenticate('jwt', { session: false }), typeRouter);
 app.use('/answer', passport.authenticate('jwt', { session: false }), answerRouter);
 // app.use('/teacher', teacherRouter);
-app.use('/subject', subjectRouter);
-app.use('/track', trackRouter);
+app.use('/subject', passport.authenticate('jwt', { session: false }), subjectRouter);
+app.use('/track', passport.authenticate('jwt', { session: false }), trackRouter);
 /****************** */ //
 app.use(function(req, res, next) {
     next(createError(404));
