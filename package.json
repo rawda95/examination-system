@@ -17,7 +17,7 @@
         "http-errors": "~1.6.2",
         "leven": "^3.1.0",
         "microtime": "^3.0.0",
-        "mongoose": "^5.5.11",
+        "mongoose": "^5.7.5",
         "mongoose-auto-increment": "^5.0.1",
         "mongoose-sequence": "^5.0.1",
         "mongoose-simple-random": "^0.4.1",
